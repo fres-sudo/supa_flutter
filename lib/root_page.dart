@@ -20,7 +20,7 @@ class RootPage extends StatelessWidget {
       },
       child: AutoTabsRouter(
         homeIndex: 0,
-        routes: const [ExploreRoute(), ProfileRoute()],
+        routes: const [HomeRoute(), ProfileRoute()],
         builder: (context, child) => Scaffold(
           body: child,
           bottomNavigationBar: BottomNavigationBar(
@@ -28,8 +28,8 @@ class RootPage extends StatelessWidget {
             landscapeLayout: .linear,
             items: [
               BottomNavigationBarItem(
-                icon: const Icon(LucideIcons.search),
-                label: 'Explore'.hardcoded(),
+                icon: const Icon(LucideIcons.home),
+                label: 'Home'.hardcoded(),
               ),
               BottomNavigationBarItem(
                 icon: const SessionAvatar(size: HuxAvatarSize.small),
