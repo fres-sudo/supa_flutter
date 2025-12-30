@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,15 +21,11 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
-  final _likedSportsController = TextEditingController();
-  final _certFilePathController = TextEditingController();
 
   @override
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
-    _likedSportsController.dispose();
-    _certFilePathController.dispose();
     super.dispose();
   }
 
@@ -89,8 +83,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           user: user,
                           firstNameController: _firstNameController,
                           lastNameController: _lastNameController,
-                          likedSportsController: _likedSportsController,
-                          certFilePathController: _certFilePathController,
                         ),
                         _ => const SizedBox.shrink(),
                       },
@@ -108,15 +100,11 @@ class _ProfileBody extends StatelessWidget {
     required this.user,
     required this.firstNameController,
     required this.lastNameController,
-    required this.likedSportsController,
-    required this.certFilePathController,
   });
 
   final UserEntity user;
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
-  final TextEditingController likedSportsController;
-  final TextEditingController certFilePathController;
 
   bool get _needsOnboarding =>
       (user.firstName == null || user.firstName!.isEmpty) ||

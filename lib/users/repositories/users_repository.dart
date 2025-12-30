@@ -55,5 +55,6 @@ class UsersRepositoryImpl extends Repository implements UsersRepository {
 
     // Reuse getProfile logic to attach certification status.
     final user = userEntityMapper.from(profileResult);
+    return user;
   });
 }
