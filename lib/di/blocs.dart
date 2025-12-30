@@ -8,11 +8,13 @@ final List<BlocProvider> _blocs = [
   ),
   BlocProvider<VersionCheckerBloc>(
     create: (context) => VersionCheckerBloc(
-        versionCheckerRepository: context.read<VersionCheckerRepository>()),
+      versionCheckerRepository: context.read<VersionCheckerRepository>(),
+    ),
   ),
   BlocProvider<UrlLauncherBloc>(
     create: (context) => UrlLauncherBloc(
-        urlLauncherRepository: context.read<UrlLauncherRepository>()),
+      urlLauncherRepository: context.read<UrlLauncherRepository>(),
+    ),
   ),
   BlocProvider<SessionCubit>(
     create: (context) => SessionCubit(context.read<AuthRepository>()),
@@ -25,9 +27,6 @@ final List<BlocProvider> _blocs = [
   ),
   BlocProvider<SignInBloc>(
     create: (context) => SignInBloc(context.read<AuthRepository>()),
-  ),
-  BlocProvider<ExploreTypeCubit>(
-    create: (context) => ExploreTypeCubit(),
   ),
   BlocProvider<ConfigCubit>(
     create: (context) =>

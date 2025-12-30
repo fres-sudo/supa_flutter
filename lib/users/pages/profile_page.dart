@@ -4,10 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hux/hux.dart';
 import 'package:supa_flutter/auth/cubits/session/session_cubit.dart';
 import 'package:supa_flutter/core/misc/extensions.dart';
-import 'package:supa_flutter/users/blocs/blocs.dart';
 import 'package:supa_flutter/users/cubits/cubits.dart';
 import 'package:supa_flutter/users/domain/domain.dart';
-import 'package:supa_flutter/users/repositories/users_repository.dart';
 import 'package:supa_flutter/users/services/requests/requests.dart';
 
 @RoutePage()
@@ -31,66 +29,47 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GuideApplicationBloc(
-        usersRepository: context.read<UsersRepository>(),
-      ),
-      child: BlocBuilder<SessionCubit, SessionState>(
-        builder: (context, sessionState) {
-          final uid = switch (sessionState) {
-            Authenticated(:final user) => user.id,
-            _ => null,
-          };
+    return BlocBuilder<SessionCubit, SessionState>(
+      builder: (context, sessionState) {
+        final uid = switch (sessionState) {
+          Authenticated(:final user) => user.id,
+          _ => null,
+        };
 
-          return BlocListener<GuideApplicationBloc, GuideApplicationState>(
-            listener: (context, state) => switch (state) {
-              SuccessGuideApplicationState() => () {
-                context.showHuxSnackbar(
-                  message: 'Application submitted. Waiting for review.'
-                      .hardcoded(),
-                );
-                // if (uid != null) context.profileCubit.load(uid: uid);
-              }(),
-              ErrorGuideApplicationState(:final message) =>
-                context.showHuxSnackbar(message: message),
-              _ => null,
-            },
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text(switch (sessionState) {
-                  Authenticated(:final user) => '${user.name} (${user.email})',
-                  Unauthenticated() => "Login".hardcoded(),
-                  _ => "Profile".hardcoded(),
-                }),
-                actions: [
-                  IconButton(
-                    onPressed: () => context.read<SessionCubit>().signOut(),
-                    icon: const Icon(Icons.logout),
-                  ),
-                ],
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(switch (sessionState) {
+              Authenticated(:final user) => '${user.name} (${user.email})',
+              Unauthenticated() => "Login".hardcoded(),
+              _ => "Profile".hardcoded(),
+            }),
+            actions: [
+              IconButton(
+                onPressed: () => context.read<SessionCubit>().signOut(),
+                icon: const Icon(Icons.logout),
               ),
-              body: uid == null
-                  ? Center(child: Text('Not signed in'.hardcoded()))
-                  : BlocBuilder<ProfileCubit, ProfileState>(
-                      builder: (context, state) => switch (state) {
-                        LoadingProfileState() => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        ErrorProfileState(:final message) => Center(
-                          child: Text(message),
-                        ),
-                        LoadedProfileState(:final user) => _ProfileBody(
-                          user: user,
-                          firstNameController: _firstNameController,
-                          lastNameController: _lastNameController,
-                        ),
-                        _ => const SizedBox.shrink(),
-                      },
+            ],
+          ),
+          body: uid == null
+              ? Center(child: Text('Not signed in'.hardcoded()))
+              : BlocBuilder<ProfileCubit, ProfileState>(
+                  builder: (context, state) => switch (state) {
+                    LoadingProfileState() => const Center(
+                      child: CircularProgressIndicator(),
                     ),
-            ),
-          );
-        },
-      ),
+                    ErrorProfileState(:final message) => Center(
+                      child: Text(message),
+                    ),
+                    LoadedProfileState(:final user) => _ProfileBody(
+                      user: user,
+                      firstNameController: _firstNameController,
+                      lastNameController: _lastNameController,
+                    ),
+                    _ => const SizedBox.shrink(),
+                  },
+                ),
+        );
+      },
     );
   }
 }
