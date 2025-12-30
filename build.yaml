@@ -1,0 +1,17 @@
+targets:
+  $default:
+    sources:
+      # Keep codegen scoped to app sources/config to avoid test compilation breaking build_runner.
+      - lib/**
+      - assets/**
+      - web/**
+      - pubspec.yaml
+      - pubspec.lock
+      - analysis_options.yaml
+      - slang.yaml
+      - launcher_icons.yaml
+      - splash.yaml
+      - $package$
+      - "!test/**"
+
+

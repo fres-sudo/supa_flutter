@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1095829830280",
+    "project_id": "supa_flutter-9674e",
+    "storage_bucket": "supa_flutter-9674e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095829830280:android:c340bf625a2b41b7fc3d3d",
+        "android_client_info": {
+          "package_name": "com.supa_flutter.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARXd-3XHeWGRlDk9n3UUagSFjmO2uHWEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

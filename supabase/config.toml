@@ -1,0 +1,14 @@
+[db.migrations]
+
+schema_paths = [
+  "./schemas/00_extensions.sql",
+  "./schemas/10_enums.sql",
+  "./schemas/20_users.sql",
+  "./schemas/30_social_groups.sql",
+  "./schemas/40_guide_slots.sql",
+  "./schemas/50_bookings.sql",
+  "./schemas/60_chats.sql",
+  "./schemas/21_users_onboarding.sql",
+  "./schemas/70_notifications.sql",
+  "./schemas/22_users_rls.sql",
+]
